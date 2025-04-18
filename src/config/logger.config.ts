@@ -1,4 +1,6 @@
 import winston from "winston";
+import { MongoDB } from "winston-mongodb";
+import { serverConfig } from '../config'
 import { getCorrelationId } from "../utils/helpers/request.helpers";
 import DailyRotateFile from "winston-daily-rotate-file";
 
@@ -25,8 +27,12 @@ const logger = winston.createLogger({
             datePattern: "YYYY-MM-DD", // The date format
             maxSize: "20m", // The maximum size of the log file
             maxFiles: "14d", // The maximum number of log files to keep
-        })
+        }),
         // TODO: add logic to integrate and save logs in mongo
+        new MongoDB({
+            db: serverConfig.LOG_DB_URI,
+            collection: 'logs',
+        })
     ]
 });
 

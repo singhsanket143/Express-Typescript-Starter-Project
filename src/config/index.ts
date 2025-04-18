@@ -2,7 +2,8 @@
 import dotenv from 'dotenv';
 
 type ServerConfig = {
-    PORT: number
+    PORT: number;
+    LOG_DB_URI: string;
 }
 
 function loadEnv() {
@@ -13,5 +14,6 @@ function loadEnv() {
 loadEnv();
 
 export const serverConfig: ServerConfig = {
-    PORT: Number(process.env.PORT) || 3001
+    PORT: Number(process.env.PORT) || 3001,
+    LOG_DB_URI: String(process.env.LOG_DB_URI ),
 };
